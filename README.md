@@ -22,8 +22,7 @@ This project emphasizes strong fundamentals in software design, testing, and pro
 		- [Security \& Database Performance (Introduced in v2)](#security--database-performance-introduced-in-v2)
 		- [Transaction History](#transaction-history)
 		- [Advanced Business Rules (Introduced in v4)](#advanced-business-rules-introduced-in-v4)
-	- [Your LinkedIn Learning Courses \& Versions](#your-linkedin-learning-courses--versions)
-	- [Additional Learning Resources (Recommended)](#additional-learning-resources-recommended)
+	- [Your Learning Material \& App Versions You Will Build](#your-learning-material--app-versions-you-will-build)
 	- [Security \& Database Performance Essentials (Read during v2)](#security--database-performance-essentials-read-during-v2)
 	- [Important Design Goals \& Testing Philosophy](#important-design-goals--testing-philosophy)
 	- [Error Messages (Use These Exact Texts When the Related Rule Applies)](#error-messages-use-these-exact-texts-when-the-related-rule-applies)
@@ -129,15 +128,15 @@ The application initially runs on the command line and uses a simple menu-driven
 
 ---
 
-## Your LinkedIn Learning Courses & Versions
+## Your Learning Material & App Versions You Will Build
 
-| Version | Course | Course Link | Core Deliverables | Optional Stretch Goals | Git Tag |
-|---------|--------|-------------|-------------------|------------------------|---------|
-| **v1** | Learning Java Collections | [View course](https://www.linkedin.com/learning/learning-java-collections) | Fully working app using in-memory storage. **Must use:** Maps for `O(1)` account lookups, and Streams with Lambda expressions for formatting/filtering transaction history. **Must include:** A solid suite of automated unit tests for your core logic. | Implement **Sociable Tests** for your core domain logic (using real objects, not mocks). Implement Test Data Builders or Object Mothers to manage test fixture complexity. Add advanced Stream analytics. | `v1-in-memory` |
-| **v2** | Relational Databases Essential Training | [View course](https://www.linkedin.com/learning/relational-databases-essential-training) | Add PostgreSQL storage using raw SQL. Use the provided `DatabaseConnectionManager` to handle connection boilerplate. **Must use:** `CHECK` constraints to enforce business rules. Design a properly **Normalized** schema. Use `PreparedStatements` to strictly prevent **SQL Injection**. | Ensure your transaction history queries avoid the **N+1 performance problem**. Create an in-memory **Fake** (e.g., `FakeAccountRepository`) for your tests. Write a setup script (`seed.sh`) to automate your local database setup. | `v2-with-storage` |
-| **v3** | Java Refactoring Best Practices | [View course](https://www.linkedin.com/learning/java-refactoring-best-practices) | Clean up the code. **Must use:** Refactor primitive obsession by creating a custom `Money` class for currency. *(Hint: Ensure your database repositories from v2 are updated to map SQL decimals directly into your new Money objects).* Handle exceptions properly and remove dead code. Ensure all tests still pass. | Build a robust Custom Exception Hierarchy (e.g., `InsufficientFundsException`, `InvalidPinException`). | `v3-refactored` |
-| **v4** | Advanced Design Patterns: Design Principles | [View course](https://www.linkedin.com/learning/advanced-design-patterns-design-principles) | Apply SOLID design principles and add Checking/Savings account types. **Must use:** Favor Composition over Inheritance to apply account behaviors rather than creating a rigid class hierarchy. Add tests for the new rules. | Apply the Interface Segregation Principle by breaking large interfaces into smaller ones (e.g., `Transferable`, `InterestBearing`). Implement the daily outgoing limit stretch goal. | `v4-solid` |
-| **v5** | An up-to-date AI-Assisted Development short course | — | Add an HTML-based graphical user interface using the existing business logic and storage layers. | Improve styling, responsiveness, or extra UI conveniences after the required flows work. | `v5-gui-ai-assisted` |
+| LinkedIn Course | Additional Learning | Version to Build | Core Deliverables | Optional Stretch Goals | Git Tag |
+|--------|---------------------|------------------|-------------------|------------------------|---------|
+| [Learning Java Collections](https://www.linkedin.com/learning/learning-java-collections) | [Sociable Testing with Fakes](sociable-testing-with-fakes.md) | **v1** | Fully working app using in-memory storage. **Must use:** Maps for `O(1)` account lookups, and Streams with Lambda expressions for formatting/filtering transaction history. **Must include:** A solid suite of automated unit tests for your core logic. | Implement **Sociable Tests** for your core domain logic (using real objects, not mocks). Implement Test Data Builders or Object Mothers to manage test fixture complexity. Add advanced Stream analytics. | `v1-in-memory` |
+| [Relational Databases Essential Training](https://www.linkedin.com/learning/relational-databases-essential-training) | [Database Integration Essentials](database-integration-essentials.md)<br>[Security & Database Performance Essentials](#security--database-performance-essentials-read-during-v2) | **v2** | Add PostgreSQL storage using raw SQL. Use the provided `DatabaseConnectionManager` to handle connection boilerplate. **Must use:** `CHECK` constraints to enforce business rules. Design a properly **Normalized** schema. Use `PreparedStatements` to strictly prevent **SQL Injection**. | Ensure your transaction history queries avoid the **N+1 performance problem**. Create an in-memory **Fake** (e.g., `FakeAccountRepository`) for your tests. Use Docker Compose (`docker-compose.yml`) to run PostgreSQL locally and a starter SQL bootstrap script (`simplebank/sql/seed.sql`) to initialize it. | `v2-with-storage` |
+| [Java Refactoring Best Practices](https://www.linkedin.com/learning/java-refactoring-best-practices) | — | **v3** | Clean up the code. **Must use:** Refactor primitive obsession by creating a custom `Money` class for currency. *(Hint: Ensure your database repositories from v2 are updated to map SQL decimals directly into your new Money objects).* Handle exceptions properly and remove dead code. Ensure all tests still pass. | Build a robust Custom Exception Hierarchy (e.g., `InsufficientFundsException`, `InvalidPinException`). | `v3-refactored` |
+| [Advanced Design Patterns: Design Principles](https://www.linkedin.com/learning/advanced-design-patterns-design-principles) | — | **v4** | Apply SOLID design principles and add Checking/Savings account types. **Must use:** Favor Composition over Inheritance to apply account behaviors rather than creating a rigid class hierarchy. Add tests for the new rules. | Apply the Interface Segregation Principle by breaking large interfaces into smaller ones (e.g., `Transferable`, `InterestBearing`). Implement the daily outgoing limit stretch goal. | `v4-solid` |
+| An up-to-date AI-Assisted Development short course | — | **v5** | Add an HTML-based graphical user interface using the existing business logic and storage layers. | Improve styling, responsiveness, or extra UI conveniences after the required flows work. | `v5-gui-ai-assisted` |
 
 Important:
 - Unless a rule is explicitly marked as starting in `v4`, it applies from `v1` onward.
@@ -145,15 +144,6 @@ Important:
 - Stretch goals are optional and do not block marking a version complete.
 - `v3` is intentionally about refactoring existing behavior, not adding new business rules.
 - `v5` is intentionally about leveraging agentic AI for replacing the interface, not redesigning the domain logic. It is more flexible, with fewer strict requirements, and gives the engineer freedom to choose the user interface and implementation approach while keeping the core app stable.
-
----
-
-## Additional Learning Resources (Recommended)
-
-The following guides I've prepared are strong complements to this project, especially once you start writing application logic and verifying behavior:
-
-- [Sociable testing with Fakes: A Pragmatic Guide to Minimal Friction Testing](sociable-testing-with-fakes.md) - Read during v1. Note: The guide's code examples use JUnit 4 conventions (`@Before`, `@RunWith`) because they target long-lived enterprise codebases. In your project you will use JUnit 5—see the mapping table near the top of the guide.
-- [Database Integration Essentials](database-integration-essentials.md) - Read before starting v2 to bridge the gap between database theory and Java implementation.
 
 ## Security & Database Performance Essentials (Read during v2)
 
@@ -237,14 +227,15 @@ For each version:
 1. Fork this repository
 2. Create a branch for v1: `git checkout -b v1-in-memory`
 3. Read the business rules carefully
-4. Note the provided `DatabaseConnectionManager.java` file in the starter code—you will use this in v2 to connect to PostgreSQL without writing JDBC setup boilerplate. You can safely ignore it during v1.
+4. Note the provided `DatabaseConnectionManager.java` file in the starter code—you will use this in v2 to connect to PostgreSQL without writing JDBC setup boilerplate. You can safely ignore it during v1. When you reach v2, start PostgreSQL with `docker compose up -d` from the repo root and let `simplebank/sql/seed.sql` create the starter schema.
 5. Start building
+## Getting Started
 
-When you complete a version, follow the [Submission Process](#submission-process) to tag and share your work.
-
-This project is designed to give you a feeling of accomplishment and a portfolio piece by the end of Month 8.
-
-Good luck! Feel free to ask questions anytime.
+1. Fork this repository
+2. Create a branch for v1: `git checkout -b v1-in-memory`
+3. Read the business rules carefully
+4. Note the provided `DatabaseConnectionManager.java` file in the starter code—you will use it in v2 to connect to PostgreSQL without writing JDBC setup boilerplate. You can safely ignore it during v1. When you reach v2, start PostgreSQL with `docker compose up -d` from the repo root and use `simplebank/sql/seed.sql` as the empty starter file for your schema work.
+5. Start building
 
 ---
 

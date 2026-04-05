@@ -7,4 +7,5 @@ Feel free to use your preferred Java version and testing framework, but the proj
 
 - `src/main/java` for application code
 - `src/test/java` for tests
-- `sql/` for database scripts used in later versions
+- `sql/` for database scripts used in later versions, starting with the empty `seed.sql`
+- `docker-compose.yml` at the repo root for starting PostgreSQL locally

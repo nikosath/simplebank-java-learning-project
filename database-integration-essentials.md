@@ -9,6 +9,7 @@ Instead, you will learn universal data access patterns and how to write secure q
 - [Database Integration Essentials](#database-integration-essentials)
   - [1. The Repository Design Pattern](#1-the-repository-design-pattern)
   - [2. Bypassing the Boilerplate (The Scaffold)](#2-bypassing-the-boilerplate-the-scaffold)
+  - [2b. Running PostgreSQL with Docker Compose](#2b-running-postgresql-with-docker-compose)
   - [3. Defeating SQL Injection (Prepared Statements)](#3-defeating-sql-injection-prepared-statements)
   - [4. Inserting and Updating Data](#4-inserting-and-updating-data)
   - [5. Protecting Multi-Step Operations (SQL Transactions)](#5-protecting-multi-step-operations-sql-transactions)
@@ -46,6 +47,16 @@ try (Connection conn = DatabaseConnectionManager.getConnection()) {
     throw new RuntimeException("Database operation failed", e);
 }
 ```
+
+## 2b. Running PostgreSQL with Docker Compose
+If you do not want to install PostgreSQL manually, the starter repo includes a basic `docker-compose.yml` at the repo root. It starts a local PostgreSQL container and mounts the empty starter `simplebank/sql/seed.sql` file into PostgreSQL's init folder, so the mentee has a dedicated place to add schema and seed statements later.
+
+```bash
+docker compose up -d
+docker compose down
+```
+
+If you add content to the seed file later, recreate the container or its volume so the init script runs again.
 
 ## 3. Defeating SQL Injection (Prepared Statements)
 Mandatory rule: you must never concatenate raw user input into a SQL string.
