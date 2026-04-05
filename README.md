@@ -2,7 +2,7 @@
 
 A Banking Application that you will build and improve step by step.
 
-**Purpose**: Apply software development skills by creating one complete banking system while following four LinkedIn Learning courses (v1–v4), plus one final AI-assisted phase (v5) where you choose a short course on AI-assisted development and use agentic AI to add a graphical user interface.
+**Purpose**: Apply software development skills by creating a simple banking system while following four LinkedIn Learning courses (v1–v4), plus one final AI-assisted phase (v5) where you choose a short course on AI-assisted development and use agentic AI to add a graphical user interface.
 
 This project emphasizes strong fundamentals in software design, testing, and problem solving, while also encouraging you to adopt tools and approaches suited to the AI era. **AI-specific assistance (code-generation tools, copilots, agentic AI) is off-limits during v1–v4.** You are expected to write the core application yourself to build genuine understanding. AI tools are introduced only in v5, after the core application is complete.
 
