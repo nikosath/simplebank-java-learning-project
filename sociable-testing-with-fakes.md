@@ -29,6 +29,17 @@ This pain usually comes from teams bouncing between two flawed testing extremes.
 This guide offers a way out of both traps. By adopting a "Sociable" testing style and using Fakes at your architectural boundaries, you can achieve the high behavioral confidence of an integration test with the speed and refactoring safety of a well-written unit test.
 
 > Note: the examples in this article intentionally use Java 8, JUnit 4, Wicket 7.x, and the latest compatible Mockito version so the patterns stay easy to apply in long-lived enterprise codebases. The same approach maps cleanly to newer stacks as well.
+>
+> **JUnit 4 → JUnit 5 Quick Reference** (for readers using the SimpleBank starter project or any JUnit 5 codebase):
+>
+> | JUnit 4 | JUnit 5 |
+> |---|---|
+> | `@RunWith(MockitoJUnitRunner.class)` | `@ExtendWith(MockitoExtension.class)` |
+> | `@Before` | `@BeforeEach` |
+> | `@After` | `@AfterEach` |
+> | `@BeforeClass` | `@BeforeAll` |
+> | `@Test` (from `org.junit`) | `@Test` (from `org.junit.jupiter.api`) |
+> | `Assert.assertEquals(...)` | `Assertions.assertEquals(...)` (or use `import static`) |
 
 This guide advocates the sociable style of testing [[2]](#ref2). There is a long-running community debate about how much to rely on mocks and when to prefer state-based behavior verification; Martin Fowler's "Mocks Aren't Stubs" article is the canonical statement of that view [[1]](#ref1). We favor the sociable approach for domain logic in mature codebases while still accepting mocks where they are the best fit at architectural boundaries.
 
