@@ -11,7 +11,8 @@ Instead, you will learn universal data access patterns and how to write secure q
   - [2. Bypassing the Boilerplate (The Scaffold)](#2-bypassing-the-boilerplate-the-scaffold)
   - [3. Defeating SQL Injection (Prepared Statements)](#3-defeating-sql-injection-prepared-statements)
   - [4. Inserting and Updating Data](#4-inserting-and-updating-data)
-  - [5. Configuration \& Credentials](#5-configuration--credentials)
+  - [5. Protecting Multi-Step Operations (SQL Transactions)](#5-protecting-multi-step-operations-sql-transactions)
+  - [6. Configuration \& Credentials](#6-configuration--credentials)
 
 ## 1. The Repository Design Pattern
 As mentioned in the testing guide, your core banking logic should not know about SQL, databases, or tables. It should only know about Domain Objects (like `Account`) and Interfaces (like `AccountRepository`).
@@ -114,15 +115,60 @@ public void save(Account account) {
 }
 ```
 
-## 5. Configuration & Credentials
-Never hardcode database credentials (URLs, usernames, passwords) directly in your Java code. If you commit them to GitHub, they are compromised.
+## 5. Protecting Multi-Step Operations (SQL Transactions)
+A transfer in SimpleBank must debit one account **and** credit another. If the application crashes between those two SQL statements, you will end up with lost money. SQL transactions solve this.
 
-The provided `DatabaseConnectionManager` is designed to read credentials from environment variables. When running your app locally, configure your environment variables:
+By default, JDBC runs every statement in its own implicit transaction (auto-commit mode). To group multiple statements into one atomic unit of work, turn auto-commit off, and commit or roll back explicitly:
 
-```bash
-DB_URL=jdbc:postgresql://localhost:5432/simplebank
-DB_USER=your_username
-DB_PASS=your_password
+```java
+public void transfer(String fromAccount, String toAccount, BigDecimal amount) {
+    String debitSql  = "UPDATE accounts SET balance = balance - ? WHERE account_number = ?";
+    String creditSql = "UPDATE accounts SET balance = balance + ? WHERE account_number = ?";
+    
+    try (Connection conn = DatabaseConnectionManager.getConnection()) {
+        conn.setAutoCommit(false); // Start transaction
+        try (PreparedStatement debit = conn.prepareStatement(debitSql);
+             PreparedStatement credit = conn.prepareStatement(creditSql)) {
+             
+            debit.setBigDecimal(1, amount);
+            debit.setString(2, fromAccount);
+            debit.executeUpdate();
+            
+            credit.setBigDecimal(1, amount);
+            credit.setString(2, toAccount);
+            credit.executeUpdate();
+            
+            conn.commit(); // Both succeeded — make permanent
+        } catch (SQLException e) {
+            conn.rollback(); // Something failed — undo everything
+            throw new RuntimeException("Transfer failed", e);
+        }
+    } catch (SQLException e) {
+        throw new RuntimeException("Database connection failed", e);
+    }
+}
 ```
 
-By mastering `PreparedStatement` and the repository pattern, you ensure your application remains secure, and your core domain logic remains blissfully unaware of the underlying SQL engine.
+Key points:
+- `setAutoCommit(false)` groups subsequent statements into a single transaction.
+- `commit()` makes all changes permanent only when every step succeeds.
+- `rollback()` undoes everything if any step fails, so the database never ends up in an inconsistent state.
+- In your SimpleBank transfer, the transaction should cover the balance updates **and** the two transaction-history inserts (`TRANSFER_OUT` and `TRANSFER_IN`).
+
+## 6. Configuration & Credentials
+Never hardcode database credentials (URLs, usernames, passwords) directly in your Java code. If you commit them to GitHub, they are compromised.
+
+The provided `DatabaseConnectionManager` is designed to read credentials from **OS environment variables** (via `System.getenv()`). Before running your app locally, export them in your terminal:
+
+```bash
+# Linux / macOS
+export DB_URL=jdbc:postgresql://localhost:5432/simplebank
+export DB_USER=your_username
+export DB_PASS=your_password
+
+# Then run your application from the same terminal session
+```
+
+Alternatively, configure these variables in your IDE's run configuration (IntelliJ: Run → Edit Configurations → Environment variables). Note: placing them in a `.env` file will **not** work automatically—`System.getenv()` reads only real OS environment variables, not `.env` files.
+
+By mastering `PreparedStatement`, transactions, and the repository pattern, you ensure your application remains secure and consistent, and your core domain logic remains blissfully unaware of the underlying SQL engine.

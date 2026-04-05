@@ -2,9 +2,9 @@
 
 A Banking Application that you will build and improve step by step.
 
-**Purpose**: Apply software development skills by creating one complete banking system while following the four LinkedIn Learning courses plus one final AI-assisted phase.
+**Purpose**: Apply software development skills by creating one complete banking system while following four LinkedIn Learning courses (v1–v4), plus one final AI-assisted phase (v5) where you choose a short course on AI-assisted development and use agentic AI to add a graphical user interface.
 
-This project emphasizes strong fundamentals in software design, testing, and problem solving, while also encouraging you to adopt tools and approaches suited to the AI era. AI-specific assistance is intended only in the final phase after the core application is built.
+This project emphasizes strong fundamentals in software design, testing, and problem solving, while also encouraging you to adopt tools and approaches suited to the AI era. **AI-specific assistance (code-generation tools, copilots, agentic AI) is off-limits during v1–v4.** You are expected to write the core application yourself to build genuine understanding. AI tools are introduced only in v5, after the core application is complete.
 
 **Target audience**: Engineers from junior to medior levels who want to practice building a full application with clear business rules and evolving requirements, including optional stretch goals for more advanced engineering skills.
 
@@ -95,6 +95,7 @@ The application initially runs on the command line and uses a simple menu-driven
 **Mandatory in v2:**
 - **SQL Injection Prevention**: The application must never concatenate raw user input into SQL query strings. You must use parameter binding (e.g., `PreparedStatements` in Java).
 - **Proper Normalization**: The database schema must be in at least 3rd Normal Form (e.g., account details and transaction records should live in separate, properly linked tables using Foreign Keys).
+- **Transfer Atomicity with SQL Transactions**: Because a transfer must either complete fully or not happen at all, you must wrap multi-step database operations in an explicit transaction (`BEGIN` / `COMMIT` / `ROLLBACK`, or `Connection.setAutoCommit(false)` in Java). Without this, a crash between the debit and credit SQL statements would leave accounts in an inconsistent state.
 
 **Optional stretch goal in v2:**
 - **The N+1 Problem**: When viewing transaction history or generating reports, the application must fetch the necessary data efficiently (e.g., using SQL `JOIN`s) rather than executing a new database query for every single row of history.
@@ -151,7 +152,7 @@ Important:
 
 The following guides I've prepared are strong complements to this project, especially once you start writing application logic and verifying behavior:
 
-- [Sociable testing with Fakes: A Pragmatic Guide to Minimal Friction Testing](sociable-testing-with-fakes.md) - Read during v1.
+- [Sociable testing with Fakes: A Pragmatic Guide to Minimal Friction Testing](sociable-testing-with-fakes.md) - Read during v1. Note: The guide's code examples use JUnit 4 conventions (`@Before`, `@RunWith`) because they target long-lived enterprise codebases. In your project you will use JUnit 5—see the mapping table near the top of the guide.
 - [Database Integration Essentials](database-integration-essentials.md) - Read before starting v2 to bridge the gap between database theory and Java implementation.
 
 ## Security & Database Performance Essentials (Read during v2)
@@ -193,12 +194,12 @@ Build the application so that:
 - "PIN must be exactly 4 digits"
 - "Amount must be at least 0.01"
 - "Maximum transaction amount is 10000.00"
-- "Insufficient funds. Current balance: X.XX"
+- "Insufficient funds. Current balance: X.XX" (where `X.XX` is the actual balance with two decimal places)
 - "Invalid account number or PIN"
 - "Source and target account must be different"
 - "Target account does not exist"
 - "Savings accounts must maintain a minimum balance of 100.00"
-- "Daily outgoing limit exceeded. Remaining daily limit: X.XX" (only if the optional `v4` stretch goal is implemented)
+- "Daily outgoing limit exceeded. Remaining daily limit: X.XX" (only if the optional `v4` stretch goal is implemented; `X.XX` is the actual remaining limit with two decimal places)
 
 ---
 
@@ -236,8 +237,10 @@ For each version:
 1. Fork this repository
 2. Create a branch for v1: `git checkout -b v1-in-memory`
 3. Read the business rules carefully
-4. Note the provided `DatabaseConnectionManager.java` file in the starter code—you will use this in v2 to connect to PostgreSQL without writing JDBC setup boilerplate.
+4. Note the provided `DatabaseConnectionManager.java` file in the starter code—you will use this in v2 to connect to PostgreSQL without writing JDBC setup boilerplate. You can safely ignore it during v1.
 5. Start building
+
+When you complete a version, follow the [Submission Process](#submission-process) to tag and share your work.
 
 This project is designed to give you a feeling of accomplishment and a portfolio piece by the end of Month 8.
 
