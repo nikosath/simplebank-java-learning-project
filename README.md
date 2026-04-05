@@ -151,7 +151,7 @@ Important:
 
 The following guides I've prepared are strong complements to this project, especially once you start writing application logic and verifying behavior:
 
-- [Pragmatic Guide to Minimal Friction Testing](pragmatic-guide-to-minimal-friction-testing.md) - Read during v1.
+- [Sociable testing with Fakes: A Pragmatic Guide to Minimal Friction Testing](sociable-testing-with-fakes.md) - Read during v1.
 - [Database Integration Essentials](database-integration-essentials.md) - Read before starting v2 to bridge the gap between database theory and Java implementation.
 
 ## Security & Database Performance Essentials (Read during v2)
