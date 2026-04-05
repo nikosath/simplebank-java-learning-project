@@ -29,7 +29,6 @@ This project emphasizes strong fundamentals in software design, testing, and pro
 	- [Suggested Schedule (Months 1–8)](#suggested-schedule-months-18)
 	- [Submission Process](#submission-process)
 	- [Getting Started](#getting-started)
-	- [Getting Started](#getting-started-1)
 
 ## Project Overview
 
