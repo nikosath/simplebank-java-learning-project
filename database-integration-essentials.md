@@ -13,7 +13,9 @@ Instead, you will learn universal data access patterns and how to write secure q
   - [3. Defeating SQL Injection (Prepared Statements)](#3-defeating-sql-injection-prepared-statements)
   - [4. Inserting and Updating Data](#4-inserting-and-updating-data)
   - [5. Protecting Multi-Step Operations (SQL Transactions)](#5-protecting-multi-step-operations-sql-transactions)
-  - [6. Configuration \& Credentials](#6-configuration--credentials)
+  - [6. Enforcing Business Rules in the Schema (CHECK Constraints)](#6-enforcing-business-rules-in-the-schema-check-constraints)
+    - [Two-layer responsibility](#two-layer-responsibility)
+  - [7. Configuration \& Credentials](#7-configuration--credentials)
 
 ## 1. The Repository Design Pattern
 As mentioned in the testing guide, your core banking logic should not know about SQL, databases, or tables. It should only know about Domain Objects (like `Account`) and Interfaces (like `AccountRepository`).
@@ -166,7 +168,20 @@ Key points:
 - `rollback()` undoes everything if any step fails, so the database never ends up in an inconsistent state.
 - In your SimpleBank transfer, the transaction should cover the balance updates **and** the two transaction-history inserts (`TRANSFER_OUT` and `TRANSFER_IN`).
 
-## 6. Configuration & Credentials
+## 6. Enforcing Business Rules in the Schema (CHECK Constraints)
+A `CHECK` constraint is a rule you add to a table column or the whole table definition. PostgreSQL will **reject any `INSERT` or `UPDATE` that violates the condition** — no matter what code path wrote it.
+
+### Two-layer responsibility
+A `CHECK` constraint and your Java validation are **not alternatives** — they serve different purposes:
+
+| Layer | Job |
+|---|---|
+| **Java service** | Runs first. Produces user-friendly error messages (e.g., `"Insufficient funds. Current balance: 42.00"`). Prevents the unnecessary database round-trip. |
+| **DB CHECK constraint** | Safety net. Catches any bug that bypasses the service: a second code path, a future storage backend, or a direct SQL script run by a developer. |
+
+The key distinction: **a violated `CHECK` constraint surfaces as a raw `SQLException`, not a friendly message**. That is why Java must always validate first, and the database constraint is purely a backstop for correctness.
+
+## 7. Configuration & Credentials
 Never hardcode database credentials (URLs, usernames, passwords) directly in your Java code. If you commit them to GitHub, they are compromised.
 
 The provided `DatabaseConnectionManager` is designed to read credentials from **OS environment variables** (via `System.getenv()`). Before running your app locally, export them in your terminal:
@@ -182,4 +197,4 @@ export DB_PASS=your_password
 
 Alternatively, configure these variables in your IDE's run configuration (IntelliJ: Run → Edit Configurations → Environment variables). Note: placing them in a `.env` file will **not** work automatically—`System.getenv()` reads only real OS environment variables, not `.env` files.
 
-By mastering `PreparedStatement`, transactions, and the repository pattern, you ensure your application remains secure and consistent, and your core domain logic remains blissfully unaware of the underlying SQL engine.
+By mastering `PreparedStatement`, transactions, `CHECK` constraints, and the repository pattern, you ensure your application remains secure and consistent, and your core domain logic remains blissfully unaware of the underlying SQL engine.
