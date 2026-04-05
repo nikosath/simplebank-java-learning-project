@@ -19,9 +19,9 @@ This project emphasizes strong fundamentals in software design, testing, and pro
 		- [Accounts](#accounts)
 		- [Banking Transactions](#banking-transactions)
 		- [Security \& Validation](#security--validation)
-		- [Security \& Database Performance (Introduced in v2)](#security--database-performance-introduced-in-v2)
 		- [Transaction History](#transaction-history)
 		- [Advanced Business Rules (Introduced in v4)](#advanced-business-rules-introduced-in-v4)
+	- [Security, Performance \& Data Integrity (Introduced in v2)](#security-performance--data-integrity-introduced-in-v2)
 	- [Your Learning Material \& App Versions You Will Build](#your-learning-material--app-versions-you-will-build)
 	- [Security \& Database Performance Essentials (Read during v2)](#security--database-performance-essentials-read-during-v2)
 	- [Important Design Goals \& Testing Philosophy](#important-design-goals--testing-philosophy)
@@ -29,6 +29,7 @@ This project emphasizes strong fundamentals in software design, testing, and pro
 	- [Suggested Schedule (Months 1–8)](#suggested-schedule-months-18)
 	- [Submission Process](#submission-process)
 	- [Getting Started](#getting-started)
+	- [Getting Started](#getting-started-1)
 
 ## Project Overview
 
@@ -90,15 +91,6 @@ The application initially runs on the command line and uses a simple menu-driven
 - You cannot withdraw or transfer more money than the current balance
 - The system must clearly explain any errors to the user
 
-### Security & Database Performance (Introduced in v2)
-**Mandatory in v2:**
-- **SQL Injection Prevention**: The application must never concatenate raw user input into SQL query strings. You must use parameter binding (e.g., `PreparedStatements` in Java).
-- **Proper Normalization**: The database schema must be in at least 3rd Normal Form (e.g., account details and transaction records should live in separate, properly linked tables using Foreign Keys).
-- **Transfer Atomicity with SQL Transactions**: Because a transfer must either complete fully or not happen at all, you must wrap multi-step database operations in an explicit transaction (`BEGIN` / `COMMIT` / `ROLLBACK`, or `Connection.setAutoCommit(false)` in Java). Without this, a crash between the debit and credit SQL statements would leave accounts in an inconsistent state.
-
-**Optional stretch goal in v2:**
-- **The N+1 Problem**: When viewing transaction history or generating reports, the application must fetch the necessary data efficiently (e.g., using SQL `JOIN`s) rather than executing a new database query for every single row of history.
-
 ### Transaction History
 - Transaction history is shown for the currently logged-in account only
 - Transactions must be displayed from newest to oldest
@@ -127,6 +119,15 @@ The application initially runs on the command line and uses a simple menu-driven
 - If this stretch goal is implemented, the validation must happen before any balance or transaction history is changed
 
 ---
+
+## Security, Performance & Data Integrity (Introduced in v2)
+**Mandatory in v2:**
+- **SQL Injection Prevention**: The application must never concatenate raw user input into SQL query strings. You must use parameter binding (e.g., `PreparedStatements` in Java).
+- **Proper Normalization**: The database schema must be in at least 3rd Normal Form (e.g., account details and transaction records should live in separate, properly linked tables using Foreign Keys).
+- **Transfer Atomicity with SQL Transactions**: Because a transfer must either complete fully or not happen at all, you must wrap multi-step database operations in an explicit transaction (`BEGIN` / `COMMIT` / `ROLLBACK`, or `Connection.setAutoCommit(false)` in Java). Without this, a crash between the debit and credit SQL statements would leave accounts in an inconsistent state.
+
+**Optional stretch goal in v2:**
+- **The N+1 Problem**: When viewing transaction history or generating reports, the application must fetch the necessary data efficiently (e.g., using SQL `JOIN`s) rather than executing a new database query for every single row of history.
 
 ## Your Learning Material & App Versions You Will Build
 
