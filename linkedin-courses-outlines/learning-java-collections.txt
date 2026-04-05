@@ -1,0 +1,175 @@
+Introduction
+Java collections framework
+57s video
+
+What you should know
+1m 25s video
+
+
+1. Java Collections Framework
+Solving everyday problems with data
+2m 9s video
+
+Data structures
+3m 7s video
+
+Collections framework architecture
+3m 22s video
+
+Working with a collection
+5m 46s video
+
+Beyond the array
+3m 1s video
+
+Chapter Quiz
+7 questions
+
+2. The Foundations of Java Collections
+Interfaces
+6m 58s video
+
+Collection types
+2m 52s video
+
+The Collection interface
+2m 4s video
+
+Collection methods
+4m 24s video
+
+Creating a collection
+5m 4s video
+
+Generic typing
+4m 26s video
+
+Object comparison
+2m 19s video
+
+The equals method
+6m 40s video
+
+Challenge: Adding and removing collection elements
+5m 6s video
+
+Challenge: Advanced collection problems
+6m 48s video
+
+Chapter Quiz
+10 questions
+
+3. Iterating Collections
+Iterating collection elements
+2m 55s video
+
+Accessing collection elements with iterators
+6m 4s video
+
+Modifying collections while iterating
+4m 39s video
+
+Accessing collection elements with streams
+5m 38s video
+
+Lambda expressions
+2m 56s video
+
+Stream operations
+4m 17s video
+
+Challenge: Iterating collections
+5m 23s video
+
+Chapter Quiz
+9 questions
+
+4. Set
+Set
+1m 52s video
+
+HashSet
+5m 12s video
+
+TreeSet
+3m 50s video
+
+Chapter Quiz
+3 questions
+
+5. List
+List interface
+3m 49s video
+
+List implementations
+3m 9s video
+
+ArrayList
+7m 9s video
+
+Challenge: Working with Lists
+7m 29s video
+
+Chapter Quiz
+4 questions
+
+6. Queue and Deque
+Queue interface
+3m 16s video
+
+Queue implementations
+6m 37s video
+
+Deque interface
+3m 52s video
+
+Using an ArrayDeque as a stack
+4m 40s video
+
+Chapter Quiz
+6 questions
+
+7. Map
+Map interface
+2m 56s video
+
+Collection views
+1m 44s video
+
+Map implementations
+3m 3s video
+
+How a HashMap works
+2m 33s video
+
+Map methods
+4m 45s video
+
+Iterating Maps
+2m 52s video
+
+Challenge: Working with Maps
+3m 46s video
+
+Chapter Quiz
+7 questions
+
+8. Collections Utilities
+Ordering elements
+4m 5s video
+
+Sorting collections
+4m 58s video
+
+Comparators
+4m 6s video
+
+Finding elements in a collection
+5m video
+
+Chapter Quiz
+5 questions
+
+Conclusion
+Course wrap-up
+1m 36s video

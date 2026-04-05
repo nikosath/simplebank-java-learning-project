@@ -1,0 +1,96 @@
+Introduction
+Why you need to refactor
+44s video
+
+Base knowledge
+35s video
+
+
+1. Importance of Best Practices and Refactoring
+Technical debt and refactoring
+2m 54s video
+
+Tools and techniques for refactoring
+5m 31s video
+
+Tips to write clean code and avoiding technical debt
+2m 50s video
+
+Chapter Quiz(In progress)
+3 questions
+
+2. Best Practices: Simplicity and Readability
+Java style guide
+1m 22s video
+
+Java naming conventions
+2m 58s video
+
+Using spacing, brackets, and comments effectively
+3m 47s video
+
+Writing clean and maintainable Java classes
+5m 43s video
+
+Best practices for writing clear and concise methods(In progress)
+5m 32s video
+
+Challenge: Applying basic best practices(Viewed)
+1m 13s video
+
+Solution: Applying basic best practices
+54s video
+
+Chapter Quiz(In progress)
+5 questions
+
+3. Best Practices: Maintainable Code
+Handling exceptions
+3m 28s video
+
+Removing dead code and other unnecessary elements
+3m 36s video
+
+Java design patterns(Viewed)
+3m 18s video
+
+SOLID principles(In progress)
+8m 58s video
+
+Testing your code
+2m 39s video
+
+Challenge: Applying exception handling and code clean-up(Viewed)
+37s video
+
+Solution: Applying exception handling and code clean-up
+53s video
+
+Chapter Quiz
+4 questions
+
+4. Refactoring: Fixing Common Code Smells
+Refactoring bloaters
+4m 45s video
+
+Refactoring primitive obsession
+3m 48s video
+
+Refactoring incorrect object-oriented programming(In progress)
+3m 45s video
+
+Refactoring excessive coupling
+2m 50s video
+
+Challenge: Refactor the legacy code
+2m 28s video
+
+Solution: Refactor the legacy code
+3m 28s video
+
+Chapter Quiz
+3 questions
+
+Conclusion
+Resources for Java refactoring
+39s video

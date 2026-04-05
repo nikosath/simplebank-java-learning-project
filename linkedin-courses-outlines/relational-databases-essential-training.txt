@@ -1,0 +1,156 @@
+Introduction
+Organize data with the relational model
+42s video
+
+What you should know
+31s video
+
+Exploring the code challenge environment
+1m 38s video
+
+
+1. Get to Know Relational Databases
+A brief introduction to data storage
+4m 15s video
+
+E.F. Codd's relational model
+4m 3s video
+
+What the CRUD?
+3m 48s video
+
+Relations, tuples, tables, and records
+3m 21s video
+
+Chapter Quiz
+4 questions
+
+2. Entity Relationship Diagrams
+Develop a model of the real world
+6m 20s video
+
+Choose an ER design tool(In progress)
+5m 7s video
+
+Design a table
+3m 39s video
+
+Attribute data types
+6m video
+
+Use primary keys to identify records
+6m video
+
+Object naming considerations
+3m 5s video
+
+Chapter Quiz
+5 questions
+
+3. Data Integrity and Validation
+Data constraints
+1m 44s video
+
+Create a unique constraint
+5m 46s video
+
+Required attributes and null values
+3m 57s video
+
+Define a default value
+3m 58s video
+
+Establish table indexes
+4m 49s video
+
+Add check constraints
+5m 24s video
+
+Chapter Quiz
+6 questions
+
+4. Relationships
+Relate tables with foreign keys
+4m 57s video
+
+Diagram a relationship
+2m 42s video
+
+Relationship optionality and cardinality
+5m 15s video
+
+One-to-many relationships
+2m 10s video
+
+One-to-one relationships
+1m 10s video
+
+Many-to-many relationships
+2m 21s video
+
+Self joins
+2m 17s video
+
+Cascade changes
+2m 17s video
+
+Chapter Quiz
+7 questions
+
+5. Normalization
+Relational database normal forms
+5m 15s video
+
+When not to normalize
+2m 29s video
+
+Chapter Quiz
+2 questions
+
+6. Structured Query Language
+Convert the ER diagram to a database
+7m video
+
+Data definition queries(In progress)
+6m 22s video
+
+</> Code Challenge: Create tables with DDL commands
+5m practice
+Solution: Create tables with DDL commands
+6m 2s video
+
+Data manipulation queries
+4m 52s video
+
+</> Code Challenge: Add data with DML commands
+6m practice
+Solution: Add data with DML commands
+5m 30s video
+
+Write database select queries(In progress)
+5m 38s video
+
+</> Code Challenge: Query data in a database
+5m practice
+Solution: Query data in a database(In progress)
+4m 26s video
+
+Create a database view
+2m 44s video
+
+Chapter Quiz
+4 questions
+
+7. Beyond the Relational Model
+Graph databases
+1m 38s video
+
+Document databases
+1m 32s video
+
+Chapter Quiz
+2 questions
+
+Conclusion
+Next steps
+59s video

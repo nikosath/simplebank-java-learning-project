@@ -1,0 +1,36 @@
+Introduction
+
+1. The Principles
+Encapsulate what varies
+5m 41s video
+
+Favor composition over inheritance
+4m 5s video
+
+Loose coupling
+4m 42s video
+
+Program to interfaces
+4m 47s video
+
+Single responsibility principle
+5m 5s video
+
+Open-closed principle
+3m 56s video
+
+Liskov's substitution principle(In progress)
+5m 37s video
+
+Interface segregation principle
+5m 29s video
+
+Dependency inversion principle(In progress)
+4m 49s video
+
+Chapter Quiz
+6 questions
+
+Conclusion
+Continuing your studies
+1m video
