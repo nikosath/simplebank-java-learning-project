@@ -229,14 +229,7 @@ For each version:
 3. Read the business rules carefully
 4. Note the provided `DatabaseConnectionManager.java` file in the starter code—you will use this in v2 to connect to PostgreSQL without writing JDBC setup boilerplate. You can safely ignore it during v1. When you reach v2, start PostgreSQL with `docker compose up -d` from the repo root and let `simplebank/sql/seed.sql` create the starter schema.
 5. Start building
-## Getting Started
-
-1. Fork this repository
-2. Create a branch for v1: `git checkout -b v1-in-memory`
-3. Read the business rules carefully
-4. Note the provided `DatabaseConnectionManager.java` file in the starter code—you will use it in v2 to connect to PostgreSQL without writing JDBC setup boilerplate. You can safely ignore it during v1. When you reach v2, start PostgreSQL with `docker compose up -d` from the repo root and use `simplebank/sql/seed.sql` as the empty starter file for your schema work.
-5. Start building
 
 ---
 
-**Happy Coding!** 🚀
+**Happy Coding!**
