@@ -1,12 +1,12 @@
 # SimpleBank - Java Learning Project
 
-A Banking Application that you will build and improve step by step.
+A guided Java banking project you will build and improve in five versions, with mentor feedback at each stage.
 
 **Purpose**: Apply software development skills by creating a simple banking system while following four LinkedIn Learning courses (v1–v4), plus one final AI-assisted phase (v5) where you choose a short course on AI-assisted development and use agentic AI to add a graphical user interface.
 
 This project emphasizes strong fundamentals in software design, testing, and problem solving, while also encouraging you to adopt tools and approaches suited to the AI era. **AI-specific assistance (code-generation tools, copilots, agentic AI) is off-limits during v1–v4.** You are expected to write the core application yourself to build genuine understanding. AI tools are introduced only in v5, after the core application is complete.
 
-**Target audience**: Engineers from junior to medior levels who want to practice building a full application with clear business rules and evolving requirements, including optional stretch goals for more advanced engineering skills.
+**Target audience**: Engineers from junior to mid-level who want to practice building a full application with clear business rules and evolving requirements, including optional stretch goals for more advanced engineering skills.
 
 ---
 
@@ -15,20 +15,19 @@ This project emphasizes strong fundamentals in software design, testing, and pro
 	- [User Interface](#user-interface)
 		- [Main Menu](#main-menu)
 		- [Account Menu (after successful login)](#account-menu-after-successful-login)
+	- [Learning Roadmap and Version Goals](#learning-roadmap-and-version-goals)
 	- [Business Rules](#business-rules)
 		- [Accounts](#accounts)
 		- [Banking Transactions](#banking-transactions)
 		- [Security \& Validation](#security--validation)
 		- [Transaction History](#transaction-history)
 		- [Advanced Business Rules (Introduced in v4)](#advanced-business-rules-introduced-in-v4)
-	- [Security, Performance \& Data Integrity (Introduced in v2)](#security-performance--data-integrity-introduced-in-v2)
-	- [Your Learning Material \& App Versions You Will Build](#your-learning-material--app-versions-you-will-build)
-	- [Security \& Database Performance Essentials (Read during v2)](#security--database-performance-essentials-read-during-v2)
-	- [Important Design Goals \& Testing Philosophy](#important-design-goals--testing-philosophy)
 	- [Error Messages (Use These Exact Texts When the Related Rule Applies)](#error-messages-use-these-exact-texts-when-the-related-rule-applies)
+	- [v2 Implementation Requirements: Security, Performance, and Data Integrity](#v2-implementation-requirements-security-performance-and-data-integrity)
+		- [Additional Reading Before Starting v2](#additional-reading-before-starting-v2)
+	- [Important Design Goals \& Testing Philosophy](#important-design-goals--testing-philosophy)
 	- [Suggested Schedule (Months 1–8)](#suggested-schedule-months-18)
-	- [Contributor Workflow](#contributor-workflow)
-	- [Submission Process](#submission-process)
+	- [Mentor and Mentee Workflow](#mentor-and-mentee-workflow)
 	- [Getting Started](#getting-started)
 
 ## Project Overview
@@ -46,7 +45,7 @@ The system allows customers to:
 
 ## User Interface
 
-The application initially runs on the command line and uses a simple menu-driven interface.
+In v1 through v4, the application runs on the command line and uses a simple menu-driven interface. In v5, you will add a browser-based UI on top of the existing business logic and storage layers.
 
 ### Main Menu
 
@@ -62,6 +61,25 @@ The application initially runs on the command line and uses a simple menu-driven
 4. Transfer Money  
 5. View Transaction History  
 6. Logout  
+
+---
+
+## Learning Roadmap and Version Goals
+
+| LinkedIn Course | Additional Learning | Version to Build | Core Deliverables | Optional Stretch Goals | Git Tag |
+|--------|---------------------|------------------|-------------------|------------------------|---------|
+| [Learning Java Collections](https://www.linkedin.com/learning/learning-java-collections) | [Sociable Testing with Fakes](sociable-testing-with-fakes.md) | **v1** | Fully working app using in-memory storage. **Must use:** Maps for `O(1)` account lookups, and Streams with Lambda expressions for formatting/filtering transaction history. **Must include:** A solid suite of automated unit tests for your core logic. | Implement **Sociable Tests** for your core domain logic (using real objects, not mocks). Implement Test Data Builders or Object Mothers to manage test fixture complexity. Add advanced Stream analytics. | `v1-in-memory` |
+| [Relational Databases Essential Training](https://www.linkedin.com/learning/relational-databases-essential-training) | [Database Integration Essentials](database-integration-essentials.md)<br>[Additional Reading Before Starting v2](#additional-reading-before-starting-v2) | **v2** | Add PostgreSQL storage using raw SQL. Use the provided `DatabaseConnectionManager` to handle connection boilerplate. **Must use:** `CHECK` constraints to enforce business rules. Design a properly **Normalized** schema. Use `PreparedStatements` to strictly prevent **SQL Injection**. | Ensure your transaction history queries avoid the **N+1 performance problem**. Create an in-memory **Fake** (e.g., `FakeAccountRepository`) for your tests. Use Docker Compose (`docker-compose.yml`) to run PostgreSQL locally and a starter SQL bootstrap script (`simplebank/sql/seed.sql`) to initialize it. | `v2-with-storage` |
+| [Java Refactoring Best Practices](https://www.linkedin.com/learning/java-refactoring-best-practices) | — | **v3** | Clean up the code. **Must use:** Refactor primitive obsession by creating a custom `Money` class for currency. *(Hint: Ensure your database repositories from v2 are updated to map SQL decimals directly into your new Money objects).* Handle exceptions properly and remove dead code. Ensure all tests still pass. | Build a robust Custom Exception Hierarchy (e.g., `InsufficientFundsException`, `InvalidPinException`). | `v3-refactored` |
+| [Advanced Design Patterns: Design Principles](https://www.linkedin.com/learning/advanced-design-patterns-design-principles) | — | **v4** | Apply SOLID design principles and add Checking/Savings account types. **Must use:** Favor Composition over Inheritance to apply account behaviors rather than creating a rigid class hierarchy. Add tests for the new rules. | Apply the Interface Segregation Principle by breaking large interfaces into smaller ones (e.g., `Transferable`, `InterestBearing`). Implement the daily outgoing limit stretch goal. | `v4-solid` |
+| An up-to-date AI-Assisted Development short course | — | **v5** | Add an HTML-based graphical user interface using the existing business logic and storage layers. | Improve styling, responsiveness, or extra UI conveniences after the required flows work. | `v5-gui-ai-assisted` |
+
+Important:
+- Unless a rule is explicitly marked as starting in `v4`, it applies from `v1` onward.
+- In `v1`, all data exists only while the program is running. Persistent storage starts in `v2`.
+- Stretch goals are optional and do not block marking a version complete.
+- `v3` is intentionally about refactoring existing behavior, not adding new business rules.
+- `v5` is intentionally about leveraging agentic AI for replacing the interface, not redesigning the domain logic. It is more flexible, with fewer strict requirements, and gives the engineer freedom to choose the user interface and implementation approach while keeping the core app stable.
 
 ---
 
@@ -120,7 +138,22 @@ The application initially runs on the command line and uses a simple menu-driven
 
 ---
 
-## Security, Performance & Data Integrity (Introduced in v2)
+## Error Messages (Use These Exact Texts When the Related Rule Applies)
+
+- "Account holder name cannot be blank"
+- "PIN must be exactly 4 digits"
+- "Amount must be at least 0.01"
+- "Maximum transaction amount is 10000.00"
+- "Insufficient funds. Current balance: X.XX" (where `X.XX` is the actual balance with two decimal places)
+- "Invalid account number or PIN"
+- "Source and target account must be different"
+- "Target account does not exist"
+- "Savings accounts must maintain a minimum balance of 100.00"
+- "Daily outgoing limit exceeded. Remaining daily limit: X.XX" (only if the optional `v4` stretch goal is implemented; `X.XX` is the actual remaining limit with two decimal places)
+
+---
+
+## v2 Implementation Requirements: Security, Performance, and Data Integrity
 **Mandatory in v2:**
 - **SQL Injection Prevention**: The application must never concatenate raw user input into SQL query strings. You must use parameter binding (e.g., `PreparedStatements` in Java).
 - **Proper Normalization**: The database schema must be in at least 3rd Normal Form (e.g., account details and transaction records should live in separate, properly linked tables using Foreign Keys).
@@ -129,26 +162,9 @@ The application initially runs on the command line and uses a simple menu-driven
 **Optional stretch goal in v2:**
 - **The N+1 Problem**: When viewing transaction history or generating reports, the application must fetch the necessary data efficiently (e.g., using SQL `JOIN`s) rather than executing a new database query for every single row of history.
 
-## Your Learning Material & App Versions You Will Build
+### Additional Reading Before Starting v2
 
-| LinkedIn Course | Additional Learning | Version to Build | Core Deliverables | Optional Stretch Goals | Git Tag |
-|--------|---------------------|------------------|-------------------|------------------------|---------|
-| [Learning Java Collections](https://www.linkedin.com/learning/learning-java-collections) | [Sociable Testing with Fakes](sociable-testing-with-fakes.md) | **v1** | Fully working app using in-memory storage. **Must use:** Maps for `O(1)` account lookups, and Streams with Lambda expressions for formatting/filtering transaction history. **Must include:** A solid suite of automated unit tests for your core logic. | Implement **Sociable Tests** for your core domain logic (using real objects, not mocks). Implement Test Data Builders or Object Mothers to manage test fixture complexity. Add advanced Stream analytics. | `v1-in-memory` |
-| [Relational Databases Essential Training](https://www.linkedin.com/learning/relational-databases-essential-training) | [Database Integration Essentials](database-integration-essentials.md)<br>[Security & Database Performance Essentials](#security--database-performance-essentials-read-during-v2) | **v2** | Add PostgreSQL storage using raw SQL. Use the provided `DatabaseConnectionManager` to handle connection boilerplate. **Must use:** `CHECK` constraints to enforce business rules. Design a properly **Normalized** schema. Use `PreparedStatements` to strictly prevent **SQL Injection**. | Ensure your transaction history queries avoid the **N+1 performance problem**. Create an in-memory **Fake** (e.g., `FakeAccountRepository`) for your tests. Use Docker Compose (`docker-compose.yml`) to run PostgreSQL locally and a starter SQL bootstrap script (`simplebank/sql/seed.sql`) to initialize it. | `v2-with-storage` |
-| [Java Refactoring Best Practices](https://www.linkedin.com/learning/java-refactoring-best-practices) | — | **v3** | Clean up the code. **Must use:** Refactor primitive obsession by creating a custom `Money` class for currency. *(Hint: Ensure your database repositories from v2 are updated to map SQL decimals directly into your new Money objects).* Handle exceptions properly and remove dead code. Ensure all tests still pass. | Build a robust Custom Exception Hierarchy (e.g., `InsufficientFundsException`, `InvalidPinException`). | `v3-refactored` |
-| [Advanced Design Patterns: Design Principles](https://www.linkedin.com/learning/advanced-design-patterns-design-principles) | — | **v4** | Apply SOLID design principles and add Checking/Savings account types. **Must use:** Favor Composition over Inheritance to apply account behaviors rather than creating a rigid class hierarchy. Add tests for the new rules. | Apply the Interface Segregation Principle by breaking large interfaces into smaller ones (e.g., `Transferable`, `InterestBearing`). Implement the daily outgoing limit stretch goal. | `v4-solid` |
-| An up-to-date AI-Assisted Development short course | — | **v5** | Add an HTML-based graphical user interface using the existing business logic and storage layers. | Improve styling, responsiveness, or extra UI conveniences after the required flows work. | `v5-gui-ai-assisted` |
-
-Important:
-- Unless a rule is explicitly marked as starting in `v4`, it applies from `v1` onward.
-- In `v1`, all data exists only while the program is running. Persistent storage starts in `v2`.
-- Stretch goals are optional and do not block marking a version complete.
-- `v3` is intentionally about refactoring existing behavior, not adding new business rules.
-- `v5` is intentionally about leveraging agentic AI for replacing the interface, not redesigning the domain logic. It is more flexible, with fewer strict requirements, and gives the engineer freedom to choose the user interface and implementation approach while keeping the core app stable.
-
-## Security & Database Performance Essentials (Read during v2)
-
-Since you are building a banking application, you must understand how to protect your database from attacks and how to query it efficiently. Before starting **v2**, read these three foundational concepts:
+These readings explain the three concepts referenced in the mandatory and optional v2 requirements above.
 
 **1. SQL Injection Prevention**
 SQL Injection is a vulnerability where an attacker alters your database queries using malicious inputs. In Java, the primary, non-negotiable defense is using `PreparedStatement` (parameterized queries) which separates the SQL logic from the data.
@@ -179,21 +195,6 @@ Build the application so that:
 
 ---
 
-## Error Messages (Use These Exact Texts When the Related Rule Applies)
-
-- "Account holder name cannot be blank"
-- "PIN must be exactly 4 digits"
-- "Amount must be at least 0.01"
-- "Maximum transaction amount is 10000.00"
-- "Insufficient funds. Current balance: X.XX" (where `X.XX` is the actual balance with two decimal places)
-- "Invalid account number or PIN"
-- "Source and target account must be different"
-- "Target account does not exist"
-- "Savings accounts must maintain a minimum balance of 100.00"
-- "Daily outgoing limit exceeded. Remaining daily limit: X.XX" (only if the optional `v4` stretch goal is implemented; `X.XX` is the actual remaining limit with two decimal places)
-
----
-
 ## Suggested Schedule (Months 1–8)
 
 This project is self-paced, but we provide a suggested 8-month schedule to help you plan your work. The first seven months focus on strong fundamentals, while the final month is reserved for the AI-assisted interface phase.  
@@ -208,36 +209,31 @@ The schedule also includes vacation time so you can balance progress with breaks
 | Month 3–4          | v2 + Relational Databases course                  | v2 complete                           |
 | Month 5            | Vacation (2 weeks) + light catch-up if needed      | —                                     |
 | Month 6            | v3 + Java Refactoring Best Practices course        | v3 complete                           |
-| Month 7            | v4 + Advanced Design Principles course             | v4 complete                           |
+| Month 7            | v4 + Advanced Design Patterns: Design Principles course | v4 complete                           |
 | Month 8            | v5 + AI-Assisted Development month                 | v5 complete (HTML GUI with AI help; AI use restricted to this phase)   |
 
 ---
 
-## Contributor Workflow
-
-- Fork the upstream repository and work in your fork only.
-- Create a branch for each version, matching the tag name, for example `v1-in-memory`.
-- Push your branch to your fork and open a pull request into the upstream `main` branch for review only.
-- After review and approval, merge the branch into your own fork's `main`.
-- Create a version tag in your fork before starting the next version, for example `v1-in-memory`.
-- Start the next version from your fork's `main`, not from the upstream `main` branch.
-
-## Submission Process
+## Mentor and Mentee Workflow
 
 For each version:
-1. Finish the work
-2. Commit your code
-3. Create and push the git tag (example: `git tag v1-in-memory && git push origin v1-in-memory`)
-4. Inform your mentor
+1. As the mentee, work in your own fork only.
+2. Create a branch for the version, matching the tag name where possible (for example `v1-in-memory`).
+3. Finish the work and commit your changes.
+4. Push your branch to your fork and open a pull request from your fork branch to the upstream `main` branch for mentor review only. Upstream maintainers will not merge mentee pull requests.
+5. After review and approval, merge the branch into your fork's `main`, create the matching tag in your fork, and push the tag.
+6. Inform your mentor with the pull request link and tag name.
+7. Start the next version from your fork's `main`.
 
 ---
 
 ## Getting Started
 
-1. Follow the Contributor Workflow above.
+1. Set up your fork and follow the Mentor and Mentee Workflow above.
 2. Read the business rules carefully.
-3. Note the provided `DatabaseConnectionManager.java` file in the starter code—you will use this in v2 to connect to PostgreSQL without writing JDBC setup boilerplate. You can safely ignore it during v1. When you reach v2, start PostgreSQL with `docker compose up -d` from the repo root and let `simplebank/sql/seed.sql` create the starter schema.
-4. Start building.
+3. Read the v1 roadmap row and start with the in-memory CLI version first.
+4. Note the provided `DatabaseConnectionManager.java` file in the starter code; you will use it in v2 to connect to PostgreSQL without writing JDBC setup boilerplate. You can safely ignore it during v1. When you reach v2, start PostgreSQL with `docker compose up -d` from the repo root and let `simplebank/sql/seed.sql` create the starter schema.
+5. Start building.
 
 ---
 
