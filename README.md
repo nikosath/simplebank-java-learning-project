@@ -2,7 +2,7 @@
 
 A guided Java banking project you will build and improve in five versions, with mentor feedback at each stage. Part of the goal is to enjoy the work and create a strong portfolio piece.
 
-**Purpose**: Apply software development skills by creating a simple banking system while following four LinkedIn Learning courses (v1–v4), plus one final AI-assisted phase (v5) where you choose a short course on AI-assisted development and use agentic AI to add a graphical user interface.
+**Purpose**: Apply software development skills by creating a simple banking system while following four LinkedIn Learning courses (v1–v4), a few additional learning materials, plus one final AI-assisted phase (v5) where you choose a short course on AI-assisted development and use agentic AI to add a graphical user interface.
 
 This project emphasizes strong fundamentals in software design, testing, and problem solving, while also encouraging you to adopt tools and approaches suited to the AI era. **AI-specific assistance (code-generation tools, copilots, agentic AI) is off-limits during v1–v4.** You are expected to write the core application yourself to build genuine understanding. AI tools are introduced only in v5, after the core application is complete.
 
@@ -68,7 +68,7 @@ In v1 through v4, the application runs on the command line and uses a simple men
 
 | LinkedIn Course | Additional Learning | Version to Build | Core Deliverables | Optional Stretch Goals | Git Tag |
 |--------|---------------------|------------------|-------------------|------------------------|---------|
-| [Learning Java Collections](https://www.linkedin.com/learning/learning-java-collections) | [Sociable Testing with Fakes](sociable-testing-with-fakes.md) | **v1** | Fully working app using in-memory storage. **Must use:** Maps for `O(1)` account lookups, and Streams with Lambda expressions for formatting/filtering transaction history. **Must include:** A solid suite of automated unit tests for your core logic. | Implement **Sociable Tests** for your core domain logic (using real objects, not mocks). Implement Test Data Builders or Object Mothers to manage test fixture complexity. Add advanced Stream analytics. | `v1-in-memory` |
+| [Learning Java Collections](https://www.linkedin.com/learning/learning-java-collections) | [Sociable Testing with Fakes](sociable-testing-with-fakes.md) *(optional)* | **v1** | Fully working app using in-memory storage. **Must use:** Maps for `O(1)` account lookups, and Streams with Lambda expressions for formatting/filtering transaction history. **Must include:** A solid suite of automated unit tests for your core logic. | Implement **Sociable Tests** for your core domain logic (using real objects, not mocks). Implement Test Data Builders or Object Mothers to manage test fixture complexity. Add advanced Stream analytics. | `v1-in-memory` |
 | [Relational Databases Essential Training](https://www.linkedin.com/learning/relational-databases-essential-training) | - [Database Integration Essentials](database-integration-essentials.md)<br> - [Additional Reading Before Starting v2](#additional-reading-before-starting-v2) | **v2** | Add PostgreSQL storage using raw SQL. Use the provided `DatabaseConnectionManager` to handle connection boilerplate. **Must use:** `CHECK` constraints to enforce business rules. Design a properly **Normalized** schema. Use `PreparedStatements` to strictly prevent **SQL Injection**. | Ensure your transaction history queries avoid the **N+1 performance problem**. Create an in-memory **Fake** (e.g., `FakeAccountRepository`) for your tests. Use Docker Compose (`docker-compose.yml`) to run PostgreSQL locally and a starter SQL bootstrap script (`simplebank/sql/seed.sql`) to initialize it. | `v2-with-storage` |
 | [Java Refactoring Best Practices](https://www.linkedin.com/learning/java-refactoring-best-practices) | — | **v3** | Clean up the code. **Must use:** Refactor primitive obsession by creating a custom `Money` class for currency. *(Hint: Ensure your database repositories from v2 are updated to map SQL decimals directly into your new Money objects).* Handle exceptions properly and remove dead code. Ensure all tests still pass. | Build a robust Custom Exception Hierarchy (e.g., `InsufficientFundsException`, `InvalidPinException`). | `v3-refactored` |
 | [Advanced Design Patterns: Design Principles](https://www.linkedin.com/learning/advanced-design-patterns-design-principles) | — | **v4** | Apply SOLID design principles and add Checking/Savings account types. **Must use:** Favor Composition over Inheritance to apply account behaviors rather than creating a rigid class hierarchy. Add tests for the new rules. | Apply the Interface Segregation Principle by breaking large interfaces into smaller ones (e.g., `Transferable`, `InterestBearing`). Implement the daily outgoing limit stretch goal. | `v4-solid` |
@@ -174,7 +174,9 @@ SQL Injection is a vulnerability where an attacker alters your database queries 
 Normalization is a database design process that breaks down large tables into smaller, related tables to eliminate data redundancy and improve data integrity.
 * **Read:** [What Is Database Normalization? (IBM)](https://www.ibm.com/think/topics/database-normalization)
 
-**3. The N+1 Query Problem**
+**Optional stretch goal reading**
+
+**3. The N+1 Query Problem** *(only if pursuing the optional N+1 stretch goal)*
 The N+1 problem is a severe performance issue where an application executes one query to fetch a list of entities (the "1"), and then executes "N" additional queries inside a loop to fetch related data for each entity. In your app, this could happen if you fetch an Account, and then run a separate query for every single Transaction history row.
 * **Read:** [The N+1 Query Problem (Vlad Mihalcea)](https://vladmihalcea.com/n-plus-1-query-problem/)
 
@@ -189,7 +191,7 @@ Build the application so that:
 
 **Testing is Mandatory**: You must write automated unit tests (e.g., using JUnit) for your core business rules. A decent suite of tests that proves your application works correctly is required for every version.
 
-**Optional Testing Challenge (The Pragmatic Way)**: If you want to push your engineering skills further, read and apply the principles from the included [sociable-testing-with-fakes.md](sociable-testing-with-fakes.md). Specifically, try to:
+**Optional Testing Challenge (The Pragmatic Way)**: If you want to push your engineering skills further, read and apply the principles from the carefully prepared testing guide, [sociable-testing-with-fakes.md](sociable-testing-with-fakes.md). Specifically, try to:
 - **Test Sociably**: Test your core domain logic using real objects, not mocks.
 - **Mock at the Boundaries**: Use Fakes (in-memory implementations) for external boundaries like databases. Only use standard mocks for UI-to-Service wiring or error simulations that are hard to fake.
 
