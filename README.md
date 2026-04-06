@@ -27,6 +27,7 @@ This project emphasizes strong fundamentals in software design, testing, and pro
 	- [Important Design Goals \& Testing Philosophy](#important-design-goals--testing-philosophy)
 	- [Error Messages (Use These Exact Texts When the Related Rule Applies)](#error-messages-use-these-exact-texts-when-the-related-rule-applies)
 	- [Suggested Schedule (Months 1–8)](#suggested-schedule-months-18)
+	- [Contributor Workflow](#contributor-workflow)
 	- [Submission Process](#submission-process)
 	- [Getting Started](#getting-started)
 
@@ -212,6 +213,15 @@ The schedule also includes vacation time so you can balance progress with breaks
 
 ---
 
+## Contributor Workflow
+
+- Fork the upstream repository and work in your fork only.
+- Create a branch for each version, matching the tag name, for example `v1-in-memory`.
+- Push your branch to your fork and open a pull request into the upstream `main` branch for review only.
+- After review and approval, merge the branch into your own fork's `main`.
+- Create a version tag in your fork before starting the next version, for example `v1-in-memory`.
+- Start the next version from your fork's `main`, not from the upstream `main` branch.
+
 ## Submission Process
 
 For each version:
@@ -224,11 +234,10 @@ For each version:
 
 ## Getting Started
 
-1. Fork this repository
-2. Create a branch for v1: `git checkout -b v1-in-memory`
-3. Read the business rules carefully
-4. Note the provided `DatabaseConnectionManager.java` file in the starter code—you will use this in v2 to connect to PostgreSQL without writing JDBC setup boilerplate. You can safely ignore it during v1. When you reach v2, start PostgreSQL with `docker compose up -d` from the repo root and let `simplebank/sql/seed.sql` create the starter schema.
-5. Start building
+1. Follow the Contributor Workflow above.
+2. Read the business rules carefully.
+3. Note the provided `DatabaseConnectionManager.java` file in the starter code—you will use this in v2 to connect to PostgreSQL without writing JDBC setup boilerplate. You can safely ignore it during v1. When you reach v2, start PostgreSQL with `docker compose up -d` from the repo root and let `simplebank/sql/seed.sql` create the starter schema.
+4. Start building.
 
 ---
 
