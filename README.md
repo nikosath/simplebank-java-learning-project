@@ -222,9 +222,9 @@ For each version:
 1. As the mentee, work in your own fork only.
 2. Create a branch for the version, matching the tag name where possible (for example `v1-in-memory`).
 3. Finish the work and commit your changes.
-4. Push your branch to your fork and open a pull request from your fork branch to the upstream `main` branch for mentor review only. Upstream maintainers will not merge mentee pull requests.
-5. After review and approval, merge the branch into your fork's `main`, create the matching tag in your fork, and push the tag.
-6. Inform your mentor with the pull request link and tag name.
+4. Push your branch to your fork, open a pull request from your fork branch to the upstream `main` branch for mentor review only, and send the PR link to your mentor. The mentor will not merge mentee pull requests.
+5. After review and approval, merge the branch into your fork's `main`.
+6. Create the matching tag in your fork, push it, and inform your mentor of the tag name.
 7. Start the next version from your fork's `main`.
 
 ---
