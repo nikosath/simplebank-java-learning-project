@@ -4,6 +4,7 @@ This note is a companion to [README.md](README.md). The README is the source of 
 
 ## Mentee Goals
 - Aim to complete the README core requirements for each version, with the main focus on understanding and correctness.
+- Have fun with the work and create a strong portfolio piece as you go.
 - Keep a basic automated test suite in place for the critical flows described in the README.
 - Use the README’s Mentor and Mentee Workflow, then share the PR link and tag name when a version is ready.
 - Treat the target months in the README as guideposts rather than hard deadlines.
