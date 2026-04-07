@@ -234,7 +234,7 @@ For each version:
 1. Set up your fork and follow the Mentor and Mentee Workflow above.
 2. Read the business rules carefully.
 3. Read the v1 roadmap row and start with the in-memory CLI version first.
-4. Note the provided `DatabaseConnectionManager.java` file in the starter code; you will use it in v2 to connect to PostgreSQL without writing JDBC setup boilerplate. You can safely ignore it during v1. When you reach v2, start PostgreSQL with `docker compose up -d` from the repo root and let `simplebank/sql/seed.sql` create the starter schema.
+4. Note the provided `DatabaseConnectionManager.java` file in the starter code; you will use it in v2 to connect to PostgreSQL without writing JDBC setup boilerplate. You can safely ignore it during v1. When you reach v2, start PostgreSQL with `docker compose up -d` from the repo root. Use the (initially empty) `simplebank/sql/seed.sql` to create the starter schema.
 5. Start building.
 
 ---
