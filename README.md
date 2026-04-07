@@ -188,11 +188,11 @@ Build the application so that:
 - The core banking logic is separate from how data is stored.
 - The user interface is separate from the banking logic.
 
-**Testing is Mandatory**: You must write automated tests (e.g., using JUnit) for your core business rules. A basic suite of tests that proves your application works correctly is required for every version.
+**Testing is Mandatory**: You must write automated tests (e.g., using JUnit). A basic suite of tests that proves your application works correctly is required for every version.
 
 **Optional stretch goal - Testing Challenge (The Pragmatic Way)**: If you want to push your engineering skills further, read and apply the principles from the carefully prepared testing guide, [sociable-testing-with-fakes.md](sociable-testing-with-fakes.md). Specifically, try to:
-- **Test Sociably**: Test your core domain logic using real objects, not mocks.
-- **Mock at the Boundaries**: Use Fakes (in-memory implementations) for external boundaries like databases. Only use standard mocks for UI-to-Service wiring or error simulations that are hard to fake.
+- **Test Sociably**: Test using real collaborators, where it makes sense.
+- **Fake the Boundaries**: Use Fakes (in-memory implementations) for external boundaries like databases. Only use standard mocks for UI-to-Service wiring or error simulations that are hard to fake.
 
 ---
 
