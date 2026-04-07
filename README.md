@@ -16,14 +16,14 @@ This project emphasizes strong fundamentals in software design, testing, and pro
 		- [Main Menu](#main-menu)
 		- [Account Menu (after successful login)](#account-menu-after-successful-login)
 	- [Learning Roadmap and Version Goals](#learning-roadmap-and-version-goals)
-	- [Business Rules](#business-rules)
+	- [Business Rules (Functional Requirements)](#business-rules-functional-requirements)
 		- [Accounts](#accounts)
 		- [Banking Transactions](#banking-transactions)
 		- [Security \& Validation](#security--validation)
 		- [Transaction History](#transaction-history)
 		- [Advanced Business Rules (Introduced in v4)](#advanced-business-rules-introduced-in-v4)
-	- [Error Messages (Use These Exact Texts When the Related Rule Applies)](#error-messages-use-these-exact-texts-when-the-related-rule-applies)
-	- [v2 Implementation Requirements: Security, Performance, and Data Integrity](#v2-implementation-requirements-security-performance-and-data-integrity)
+		- [Error Messages (Use These Exact Texts When the Related Rule Applies)](#error-messages-use-these-exact-texts-when-the-related-rule-applies)
+	- [Implementation Requirements (Non-Functional Requirements)](#implementation-requirements-non-functional-requirements)
 		- [Additional Reading Before Starting v2](#additional-reading-before-starting-v2)
 	- [Important Design Goals \& Testing Philosophy](#important-design-goals--testing-philosophy)
 	- [Suggested Schedule (Months 1–8)](#suggested-schedule-months-18)
@@ -45,7 +45,7 @@ The system allows customers to:
 
 ## User Interface
 
-In v1 through v4, the application runs on the command line and uses a simple menu-driven interface. In v5, you will add a browser-based UI on top of the existing business logic and storage layers.
+In v1 through v4, the application runs on the command line and uses a simple menu-driven interface. In v5, you will add a browser-based UI on top of the existing business logic and storage layers. The CLI should remain available, and both the GUI and CLI must be active after the app starts.
 
 ### Main Menu
 
@@ -68,10 +68,10 @@ In v1 through v4, the application runs on the command line and uses a simple men
 
 | LinkedIn Course | Additional Learning | Version to Build | Core Deliverables | Optional Stretch Goals | Git Tag |
 |--------|---------------------|------------------|-------------------|------------------------|---------|
-| [Learning Java Collections](https://www.linkedin.com/learning/learning-java-collections) | [Sociable Testing with Fakes](sociable-testing-with-fakes.md) *(optional)* | **v1** | Fully working app using in-memory storage. **Must use:** Maps for `O(1)` account lookups, and Streams with Lambda expressions for formatting/filtering transaction history. **Must include:** A solid suite of automated unit tests for your core logic. | Implement **Sociable Tests** for your core domain logic (using real objects, not mocks). Implement Test Data Builders or Object Mothers to manage test fixture complexity. Add advanced Stream analytics. | `v1-in-memory` |
-| [Relational Databases Essential Training](https://www.linkedin.com/learning/relational-databases-essential-training) | - [Database Integration Essentials](database-integration-essentials.md)<br> - [Additional Reading Before Starting v2](#additional-reading-before-starting-v2) | **v2** | Add PostgreSQL storage using raw SQL. Use the provided `DatabaseConnectionManager` to handle connection boilerplate. **Must use:** `CHECK` constraints to enforce business rules. Design a properly **Normalized** schema. Use `PreparedStatements` to strictly prevent **SQL Injection**. | Ensure your transaction history queries avoid the **N+1 performance problem**. Create an in-memory **Fake** (e.g., `FakeAccountRepository`) for your tests. Use Docker Compose (`docker-compose.yml`) to run PostgreSQL locally and a starter SQL bootstrap script (`simplebank/sql/seed.sql`) to initialize it. | `v2-with-storage` |
-| [Java Refactoring Best Practices](https://www.linkedin.com/learning/java-refactoring-best-practices) | — | **v3** | Clean up the code. **Must use:** Refactor primitive obsession by creating a custom `Money` class for currency. *(Hint: Ensure your database repositories from v2 are updated to map SQL decimals directly into your new Money objects).* Handle exceptions properly and remove dead code. Ensure all tests still pass. | Build a robust Custom Exception Hierarchy (e.g., `InsufficientFundsException`, `InvalidPinException`). | `v3-refactored` |
-| [Advanced Design Patterns: Design Principles](https://www.linkedin.com/learning/advanced-design-patterns-design-principles) | — | **v4** | Apply SOLID design principles and add Checking/Savings account types. **Must use:** Favor Composition over Inheritance to apply account behaviors rather than creating a rigid class hierarchy. Add tests for the new rules. | Apply the Interface Segregation Principle by breaking large interfaces into smaller ones (e.g., `Transferable`, `InterestBearing`). Implement the daily outgoing limit stretch goal. | `v4-solid` |
+| [Learning Java Collections](https://www.linkedin.com/learning/learning-java-collections) | [Sociable Testing with Fakes](sociable-testing-with-fakes.md) *(optional)* | **v1** | Fully working app using in-memory storage. **Suggestion:** use Maps for `O(1)` account lookups, and Streams with Lambda expressions for formatting/filtering transaction history. **Suggestion:** include a solid suite of automated unit tests for your core logic. | Implement **Sociable Tests**. | `v1-in-memory` |
+| [Relational Databases Essential Training](https://www.linkedin.com/learning/relational-databases-essential-training) | - [Database Integration Essentials](database-integration-essentials.md)<br> - [Additional Reading Before Starting v2](#additional-reading-before-starting-v2) | **v2** | Add PostgreSQL storage using raw SQL. Use the provided `DatabaseConnectionManager` to handle connection boilerplate. **Suggestion:** use `CHECK` constraints to enforce business rules. Design a properly **Normalized** schema. Use `PreparedStatements` to strictly prevent **SQL Injection**. | Ensure your transaction history queries avoid the **N+1 performance problem**. Create an in-memory **Fake** (e.g., `FakeAccountRepository`) for your tests. Use Docker Compose (`docker-compose.yml`) to run PostgreSQL locally and a starter SQL bootstrap script (`simplebank/sql/seed.sql`) to initialize it. | `v2-with-storage` |
+| [Java Refactoring Best Practices](https://www.linkedin.com/learning/java-refactoring-best-practices) | — | **v3** | Clean up the code. **Suggestion:** refactor primitive obsession by creating a custom `Money` class for currency. *(Hint: Ensure your database repositories from v2 are updated to map SQL decimals directly into your new Money objects).* Handle exceptions properly and remove dead code. Ensure all tests still pass. | Build a robust Custom Exception Hierarchy (e.g., `InsufficientFundsException`, `InvalidPinException`). | `v3-refactored` |
+| [Advanced Design Patterns: Design Principles](https://www.linkedin.com/learning/advanced-design-patterns-design-principles) | — | **v4** | Apply SOLID design principles and add Checking/Savings account types. **Suggestion:** favor Composition over Inheritance to apply account behaviors rather than creating a rigid class hierarchy. Add tests for the new rules. | Apply the Interface Segregation Principle by breaking large interfaces into smaller ones (e.g., `Transferable`, `InterestBearing`). Implement the daily outgoing limit stretch goal. | `v4-solid` |
 | An up-to-date AI-Assisted Development short course | — | **v5** | Add an HTML-based graphical user interface using the existing business logic and storage layers. | Improve styling, responsiveness, or extra UI conveniences after the required flows work. | `v5-gui-ai-assisted` |
 
 Important:
@@ -83,7 +83,8 @@ Important:
 
 ---
 
-## Business Rules
+## Business Rules (Functional Requirements)
+**Mandatory in `v1` and later**
 
 ### Accounts
 - Every account has a unique account number (format: ACC-000123)
@@ -136,9 +137,7 @@ Important:
 - For any account, the total amount sent out per calendar day (`withdrawals + outgoing transfers`) cannot exceed `5000.00`
 - If this stretch goal is implemented, the validation must happen before any balance or transaction history is changed
 
----
-
-## Error Messages (Use These Exact Texts When the Related Rule Applies)
+### Error Messages (Use These Exact Texts When the Related Rule Applies)
 
 - "Account holder name cannot be blank"
 - "PIN must be exactly 4 digits"
@@ -153,7 +152,8 @@ Important:
 
 ---
 
-## v2 Implementation Requirements: Security, Performance, and Data Integrity
+## Implementation Requirements (Non-Functional Requirements)  
+
 **Mandatory in v2:**
 - **SQL Injection Prevention**: The application must never concatenate raw user input into SQL query strings. You must use parameter binding (e.g., `PreparedStatements` in Java).
 - **Proper Normalization**: The database schema must be in at least 3rd Normal Form (e.g., account details and transaction records should live in separate, properly linked tables using Foreign Keys).
@@ -187,11 +187,10 @@ The N+1 problem is a severe performance issue where an application executes one 
 Build the application so that:
 - The core banking logic is separate from how data is stored.
 - The user interface is separate from the banking logic.
-- In the future, it will be easy to replace the current interface with a graphical one.
 
-**Testing is Mandatory**: You must write automated unit tests (e.g., using JUnit) for your core business rules. A decent suite of tests that proves your application works correctly is required for every version.
+**Testing is Mandatory**: You must write automated tests (e.g., using JUnit) for your core business rules. A basic suite of tests that proves your application works correctly is required for every version.
 
-**Optional Testing Challenge (The Pragmatic Way)**: If you want to push your engineering skills further, read and apply the principles from the carefully prepared testing guide, [sociable-testing-with-fakes.md](sociable-testing-with-fakes.md). Specifically, try to:
+**Optional stretch goal - Testing Challenge (The Pragmatic Way)**: If you want to push your engineering skills further, read and apply the principles from the carefully prepared testing guide, [sociable-testing-with-fakes.md](sociable-testing-with-fakes.md). Specifically, try to:
 - **Test Sociably**: Test your core domain logic using real objects, not mocks.
 - **Mock at the Boundaries**: Use Fakes (in-memory implementations) for external boundaries like databases. Only use standard mocks for UI-to-Service wiring or error simulations that are hard to fake.
 
