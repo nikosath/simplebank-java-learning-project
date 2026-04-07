@@ -154,12 +154,12 @@ Important:
 
 ## Implementation Requirements (Non-Functional Requirements)  
 
-**Mandatory in v2:**
+**Mandatory in `v2`:**
 - **SQL Injection Prevention**: The application must never concatenate raw user input into SQL query strings. You must use parameter binding (e.g., `PreparedStatements` in Java).
 - **Proper Normalization**: The database schema must be in at least 3rd Normal Form (e.g., account details and transaction records should live in separate, properly linked tables using Foreign Keys).
 - **Transfer Atomicity with SQL Transactions**: Because a transfer must either complete fully or not happen at all, you must wrap multi-step database operations in an explicit transaction (`BEGIN` / `COMMIT` / `ROLLBACK`, or `Connection.setAutoCommit(false)` in Java). Without this, a crash between the debit and credit SQL statements would leave accounts in an inconsistent state.
 
-**Optional stretch goal in v2:**
+**Optional stretch goal in `v2`:**
 - **The N+1 Problem**: When viewing transaction history or generating reports, the application must fetch the necessary data efficiently (e.g., using SQL `JOIN`s) rather than executing a new database query for every single row of history.
 
 ### Additional Reading Before Starting v2
