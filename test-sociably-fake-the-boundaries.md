@@ -1,5 +1,5 @@
-# Sociable testing with Fakes: A Pragmatic Guide to Minimal Friction Testing
-- [Sociable testing with Fakes: A Pragmatic Guide to Minimal Friction Testing](#sociable-testing-with-fakes-a-pragmatic-guide-to-minimal-friction-testing)
+# Test Sociably, Fake the Boundaries: A Pragmatic Guide to Minimal Friction Testing
+- [Test Sociably, Fake the Boundaries: A Pragmatic Guide to Minimal Friction Testing](#test-sociably-fake-the-boundaries-a-pragmatic-guide-to-minimal-friction-testing)
   - [1. Introduction: Brittle Tests and Mock Overuse](#1-introduction-brittle-tests-and-mock-overuse)
     - [The Hierarchy of Test Doubles (When You Must Substitute)](#the-hierarchy-of-test-doubles-when-you-must-substitute)
   - [2. The Setup: A Relatable Enterprise Example](#2-the-setup-a-relatable-enterprise-example)
